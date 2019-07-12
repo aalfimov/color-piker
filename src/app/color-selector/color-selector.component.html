@@ -1,0 +1,53 @@
+<div class="dropdown">
+  <label>
+    <input value="{{this.selectedColor}}" [style.background]="selectedColor">
+  </label>
+  <button class="class="dropbtn"git type="button" data-toggle="dropdown" >Colors Palette <span class="caret"></span></button>
+  <div class="dropdown-content">
+    <table>
+      <tr>
+        <td>
+          <div class="dropdown-item" id="color1" (click)="chooseColor(this.color1)">{{this.color1}}</div>
+        </td>
+        <td>
+          <div class="dropdown-item" id="color2" (click)="chooseColor(this.color2)">{{this.color2}}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="dropdown-item" id="color3" (click)="chooseColor(this.color3)">{{this.color3}}</div>
+        </td>
+        <td>
+          <div class="dropdown-item" id="color4" (click)="chooseColor(this.color4)">{{this.color4}}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="dropdown-item" id="color5" (click)="chooseColor(this.color5)">{{this.color5}}</div>
+        </td>
+        <td>
+          <div class="dropdown-item" id="color6" (click)="chooseColor(this.color6)">{{this.color6}}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="dropdown-item" id="color7" (click)="chooseColor(this.color7)">{{this.color7}}</div>
+        </td>
+        <td>
+          <div class="dropdown-item" id="color8" (click)="chooseColor(this.color8)">{{this.color8}}</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!--<div class="dropdown">-->
+<!--  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--    Dropdown button-->
+<!--  </button>-->
+<!--  <div class="dropdown-menu" aria-labelledby="dropdownMenu">-->
+<!--    <a class="dropdown-item" href="#">Item</a>-->
+<!--    <a class="dropdown-item" href="#">Another item</a>-->
+<!--    <a class="dropdown-item" href="#">One more item</a>-->
+<!--  </div>-->
+<!--</div>-->
