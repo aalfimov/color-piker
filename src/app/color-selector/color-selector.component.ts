@@ -15,7 +15,10 @@ export class ColorSelectorComponent implements OnInit {
   color6 = '#871b48';
   color7 = '#1f5494';
   color8 = '#21943f';
-
+  colorArray = ['#f5f542', '#f23565', '#3cb4f0', '#35f267', '#855313', '#871b48', '#1f5494', '#21943f'];
+  dropdownClicker = false;
+  // закрывать меню по клику в другом месте
+  // передавайть массив цветов через инпут
   constructor() {
   }
 
@@ -24,5 +27,9 @@ export class ColorSelectorComponent implements OnInit {
 
   chooseColor(pikedColor) {
     this.selectedColor = pikedColor;
+  }
+
+  clickShow() {
+    this.dropdownClicker = !this.dropdownClicker;
   }
 }
