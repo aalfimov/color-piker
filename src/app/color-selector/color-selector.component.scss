@@ -1,4 +1,4 @@
-$selectedColor: 'blue';
+//$selectedColor: 'blue';
 
 //:host {
 //  width: 250px;
@@ -11,18 +11,21 @@ $selectedColor: 'blue';
 
 .dropdown {
   padding: 100px;
+  width: 400px;
   //position: relative;
   //display: inline-block;
 }
 
 .dropdown-content {
-  position: absolute;
+  // position: absolute;
   background-color: #f9f9f9;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 1;
+  display: flex;
 }
 
 .dropdown-item {
+  width: 100px;
   padding: 20px 100px;
   border: 1px solid transparent;
 }
@@ -30,42 +33,42 @@ $selectedColor: 'blue';
 .dropdown-item:hover {
   border: 1px solid black;
 }
-span {
-  position: absolute;
-}
+//span {
+//  position: absolute;
+//}
 
-.active-color-block {
-  background-color: $selectedColor;
-}
+//.active-color-block {
+//  background-color: $selectedColor;
+//}
 
-#color1 {
-  background-color: #f5f542;
-}
-
-#color2 {
-  background-color: #f23565;
-}
-
-#color3 {
-  background-color: #3cb4f0;
-}
-
-#color4 {
-  background-color: #35f267;
-}
-
-#color5 {
-  background-color: #855313;
-}
-
-#color6 {
-  background-color: #871b48;
-}
-
-#color7 {
-  background-color: #1f5494;
-}
-
-#color8 {
-  background-color: #21943f;
-}
+//#color1 {
+//  background-color: #f5f542;
+//}
+//
+//#color2 {
+//  background-color: #f23565;
+//}
+//
+//#color3 {
+//  background-color: #3cb4f0;
+//}
+//
+//#color4 {
+//  background-color: #35f267;
+//}
+//
+//#color5 {
+//  background-color: #855313;
+//}
+//
+//#color6 {
+//  background-color: #871b48;
+//}
+//
+//#color7 {
+//  background-color: #1f5494;
+//}
+//
+//#color8 {
+//  background-color: #21943f;
+//}

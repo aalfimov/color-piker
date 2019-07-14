@@ -5,7 +5,7 @@
   <button  class="dropbtn" (click)="clickShow()" >Colors Palette <span class="caret"></span></button>
   <div  *ngIf=this.dropdownClicker id="myDropdown" class="dropdown-content" >
     <div *ngFor="let color of this.colorArray">
-      <div class="dropdown-item" [style.background]="this.colorArray[color]" (click)="chooseColor(color)" >{{this.colorArray[color]}}</div>
+      <div class="dropdown-item" [style.background]="color" (click)="chooseColor(color)" >{{this.colorArray[color]}}</div>
     </div>
 <!--    <table>-->
 <!--      <tr>-->

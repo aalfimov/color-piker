@@ -19,7 +19,9 @@ export class ColorSelectorComponent implements OnInit {
   dropdownClicker = false;
   // закрывать меню по клику в другом месте
   // передавайть массив цветов через инпут
-  constructor() {
+  // https://jsbin.com/bugare/edit?html,css,js,output
+  constructor(newColors) {
+    this.colorArray = newColors;
   }
 
   ngOnInit(): void {
