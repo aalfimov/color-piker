@@ -47,11 +47,11 @@ export class ColorSelectorComponent implements ControlValueAccessor {
   }
 
   registerOnChange(fn: any): void {
-    this.onChange() = fn;
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
-    this.onTouched() = fn;
+    this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {
