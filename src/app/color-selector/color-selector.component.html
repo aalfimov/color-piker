@@ -1,45 +1,20 @@
 <div class="dropdown">
   <label>
-    <input value="{{this.selectedColor}}" [style.background]="selectedColor">
+    <input type="text" class="form-control" value="{{this.selectedColor}}" [style.background]="selectedColor">
   </label>
-  <button  class="dropbtn" (click)="clickShow()" >Colors Palette <span class="caret"></span></button>
-  <div  *ngIf=this.dropdownClicker id="myDropdown" class="dropdown-content" >
+  <button class="btn btn-secondary dropdown-toggle dropdown-btn"
+          (click)="clickOnButton()"
+          (clickOutside)="clickOutsideButton()"
+          type="button"
+          data-toggle="dropdown">Colors Palette
+    <span class="caret"></span>
+  </button>
+  <div *ngIf=this.dropdownButtonState id="myDropdown" class="dropdown-content">
     <div *ngFor="let color of this.colorArray">
-      <div class="dropdown-item" [style.background]="color" (click)="chooseColor(color)" >{{this.colorArray[color]}}</div>
+      <div class="dropdown-item"
+           [style.background]="color"
+           (click)="chooseColor(color)">{{this.colorArray[color]}}</div>
     </div>
-<!--    <table>-->
-<!--      <tr>-->
-<!--        <td>-->
-<!--          <div class="dropdown-item" id="color1" (click)="chooseColor(this.color1)">{{this.color1}}</div>-->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <div class="dropdown-item" id="color2" (click)="chooseColor(this.color2)">{{this.color2}}</div>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>-->
-<!--          <div class="dropdown-item" id="color3" (click)="chooseColor(this.color3)">{{this.color3}}</div>-->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <div class="dropdown-item" id="color4" (click)="chooseColor(this.color4)">{{this.color4}}</div>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>-->
-<!--          <div class="dropdown-item" id="color5" (click)="chooseColor(this.color5)">{{this.color5}}</div>-->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <div class="dropdown-item" id="color6" (click)="chooseColor(this.color6)">{{this.color6}}</div>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>-->
-<!--          <div class="dropdown-item" id="color7" (click)="chooseColor(this.color7)">{{this.color7}}</div>-->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <div class="dropdown-item" id="color8" (click)="chooseColor(this.color8)">{{this.color8}}</div>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--    </table>-->
   </div>
 </div>
+

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ColorSelectorComponent } from './color-selector.component';
+import {ColorSelectorComponent} from './color-selector.component';
 
 describe('ColorSelectorComponent', () => {
   let component: ColorSelectorComponent;
@@ -8,9 +8,9 @@ describe('ColorSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ColorSelectorComponent ]
+      declarations: [ColorSelectorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
