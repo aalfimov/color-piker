@@ -19,7 +19,7 @@ export class ColorSelectorComponent implements ControlValueAccessor {
   dropdownButtonState = false;
   // tslint:disable-next-line:no-input-rename
   @Input('value') colorArray: string[] = [];
-  selectedColor = 'gray';
+  selectedColor = 'lightgray';
 
   chooseColor(pikedColor) {
     this.writeValue(pikedColor);
