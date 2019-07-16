@@ -4,6 +4,7 @@ import {ClickOutsideModule} from 'ng-click-outside';
 
 import {AppComponent} from './app.component';
 import {ColorSelectorComponent} from './color-selector/color-selector.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,9 @@ import {ColorSelectorComponent} from './color-selector/color-selector.component'
   ],
   imports: [
     BrowserModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

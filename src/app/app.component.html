@@ -1,1 +1,6 @@
-<app-color-selector [colorArray]="colorArray"></app-color-selector>
+<form [formGroup]="colorForm">
+  <h1>Color Form</h1>
+  <app-color-selector [value]="palette" formControlName="color"></app-color-selector>
+  <p>color: {{colorForm.value.color |json}}</p>
+  <p>valid: {{colorForm.controls.color.valid |json}}</p>
+</form>
