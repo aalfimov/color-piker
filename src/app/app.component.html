@@ -1,9 +1,1 @@
-<form [formGroup]="colorForm">
-  <h1>Color Form</h1>
-  <app-color-selector [value]="palette" formControlName="color"></app-color-selector>
-  <p>color: {{colorForm.value.color |json}}</p>
-  <p>valid: {{colorForm.controls.color.valid |json}}</p>
-  <button class="btn btn-outline-dark"
-          type="submit"
-          [disabled]="!colorForm.controls.color.valid">Submit</button>
-</form>
+<app-form></app-form>

@@ -5,11 +5,13 @@ import {ClickOutsideModule} from 'ng-click-outside';
 import {AppComponent} from './app.component';
 import {ColorSelectorComponent} from './color-selector/color-selector.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ColorSelectorComponent
+    ColorSelectorComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
