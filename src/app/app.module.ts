@@ -6,12 +6,14 @@ import {AppComponent} from './app.component';
 import {ColorSelectorComponent} from './color-selector/color-selector.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormComponent } from './form/form.component';
+import { DropdownButtonComponent } from './color-selector/dropdown-button/dropdown-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ColorSelectorComponent,
-    FormComponent
+    FormComponent,
+    DropdownButtonComponent
   ],
   imports: [
     BrowserModule,

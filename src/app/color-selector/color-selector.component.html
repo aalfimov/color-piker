@@ -12,7 +12,8 @@
           data-toggle="dropdown">Colors Palette
     <span class="caret"></span>
   </button>
-  <div *ngIf=this.dropdownButtonState id="myDropdown" class="dropdown-content">
+<!--  <app-dropdown-button [label]="'Colors Palette'"></app-dropdown-button>-->
+  <div *ngIf='dropdownButtonState' id="myDropdown" class=" dropdown-content">
     <div *ngFor="let color of this.colorArray">
       <div class="dropdown-item"
            [style.background]="color"
