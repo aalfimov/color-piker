@@ -63,7 +63,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "color-piker:build"
+            "browserTarget": "color-piker:build",
+            "poll": 2000
           },
           "configurations": {
             "production": {

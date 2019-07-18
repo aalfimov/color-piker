@@ -1,1 +1,4 @@
 <app-form></app-form>
+<input #box (keydown.enter)="onEnter()" >
+<p>{{value}}</p>
+<!--(keyup.enter)="onEnter(box.value)"-->

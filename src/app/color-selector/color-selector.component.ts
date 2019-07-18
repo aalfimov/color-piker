@@ -1,6 +1,39 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import {Component, Directive, forwardRef, HostListener, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
+
+
+@Directive({selector: '[appOnlyMyBacon]'})
+export class KeyboardListenerDirective {
+
+  @HostListener('window:keyup', ['$event'])
+  keyEventArrowUp(event: KeyboardEvent) {
+    console.log(event.code);
+  }
+  // @HostListener('window:keyup.arrowleft', ['$event'])
+  // keyEventArrowLeft(event: KeyboardEvent) {
+  //   console.log('window:keyup.arrowleft');
+  // }
+  // @HostListener('window:keyup.arrowdown', ['$event'])
+  // keyEventArrowDown(event: KeyboardEvent) {
+  //   console.log('window:keyup.arrowdown');
+  // }
+  // @HostListener('window:keyup.arrowright', ['$event'])
+  // keyEventArrowRight(event: KeyboardEvent) {
+  //   console.log('window:keyup.arrowright');
+  // }
+  // @HostListener('window:keyup.enter', ['$event'])
+  // keyEventEnter(event: KeyboardEvent) {
+  //   console.log('window:keyup.enter');
+  // }
+  // @HostListener('window:keyup.escape', ['$event'])
+  // keyEventEscape(event: KeyboardEvent) {
+  // }
+  // @HostListener('mouseenter', ['$event'])
+  // onMouseEnter(event: any) {
+  //   console.log(event);
+  // }
+}
 
 @Component({
   selector: 'app-color-selector',
@@ -20,7 +53,8 @@ export class ColorSelectorComponent implements ControlValueAccessor {
   // tslint:disable-next-line:no-input-rename
   @Input('value') colorArray: string[] = [];
   selectedColor = 'lightgray';
-  private dropdownButtonState = false;
+  arrowkeyLocation = 0;
+  public dropdownButtonState = false;
 
   constructor() { }
   clickOnButton() {
@@ -34,6 +68,7 @@ export class ColorSelectorComponent implements ControlValueAccessor {
   chooseColor(pikedColor) {
     this.writeValue(pikedColor);
     this.selectedColor = pikedColor;
+    console.log(pikedColor);
   }
 
   onChange: any = () => {  };
@@ -59,6 +94,16 @@ export class ColorSelectorComponent implements ControlValueAccessor {
   writeValue(value) {
     if (value) {
       this.value = value;
+    }
+  }
+  keyDown(event: KeyboardEvent) {
+    switch (event.keyCode) {
+      case 38: // this is the ascii of arrow up
+        this.arrowkeyLocation--;
+        break;
+      case 40: // this is the ascii of arrow down
+        this.arrowkeyLocation++;
+        break;
     }
   }
 }

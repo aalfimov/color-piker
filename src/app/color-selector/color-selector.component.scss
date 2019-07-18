@@ -22,3 +22,27 @@
 .dropdown-item:hover {
   border: 1px solid black;
 }
+// span {
+//  height: 0px;
+//  overflow: hidden;
+//  -webkit-transition: all 0.5s ease-in-out;
+//  -moz-transition: all 0.5s ease-in-out;
+//  -o-transition: all 0.5s ease-in-out;
+//  transition: all 0.5s ease-in-out;
+//}
+//
+//span:hover {
+//  height: auto;
+//}
+//span {
+//  overflow: hidden;
+//  transition: all .3s ease;
+//}
+//
+//span.folded {
+//  max-height: 0;
+//}
+//
+//span.unfolded {
+//  max-height: 300px; //value of max-height should always bigger than actual sum of all li's height
+//}

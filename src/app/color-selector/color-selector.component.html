@@ -1,23 +1,64 @@
 <div class="dropdown">
   <label>
-    <input type="text"
+    <input [style.background]="selectedColor"
            class="form-control"
-           value="{{this.selectedColor}}"
-           [style.background]="selectedColor">
+           type="text"
+           value="{{this.selectedColor}}">
   </label>
-  <button class="btn btn-outline-dark dropdown-toggle dropdown-btn"
-          (click)="clickOnButton()"
+  <button (click)="clickOnButton()"
           (clickOutside)="clickOutsideButton()"
-          type="button"
-          data-toggle="dropdown">Colors Palette
+          class="btn btn-outline-dark dropdown-toggle"
+          data-toggle="dropdown"
+          type="button">Colors Palette
     <span class="caret"></span>
   </button>
-<!--  <app-dropdown-button [label]="'Colors Palette'"></app-dropdown-button>-->
-  <div *ngIf='dropdownButtonState' id="myDropdown" class=" dropdown-content">
-    <div *ngFor="let color of this.colorArray">
-      <div class="dropdown-item"
+  <div appOnlyMyBacon
+       *ngIf='dropdownButtonState'
+       class=" dropdown-content"
+       id="myDropdown">
+    <div *ngFor="let color of this.colorArray; let i = index"
+         [class.active]="i == arrowkeyLocation"
+
+         tabindex="-0">
+      <div
+        (click)="chooseColor(color)"
+           (keydown.enter)="chooseColor(color)"
            [style.background]="color"
-           (click)="chooseColor(color)">{{this.colorArray[color]}}</div>
+           class="dropdown-item active"
+           tabindex="-1">{{this.colorArray[color]}}
+      </div>
     </div>
   </div>
 </div>
+
+<!--            (onKeydown)="return event.keyCode != 13 || chooseColor(color)"-->
+<!--<div class="dropdown">-->
+<!--  <label>-->
+<!--    <input [style.background]="selectedColor"-->
+<!--           class="form-control"-->
+<!--           type="text"-->
+<!--           value="{{this.selectedColor}}">-->
+<!--  </label>-->
+<!--  <button-->
+<!--    (click)="clickOnButton()"-->
+<!--    (clickOutside)="clickOutsideButton()"-->
+<!--    aria-expanded="false"-->
+<!--    aria-haspopup="true"-->
+<!--    class="btn btn-secondary dropdown-toggle"-->
+<!--    data-toggle="dropdown"-->
+<!--    id="dropdownMenuButton"-->
+<!--    type="button">Colors Palette-->
+<!--    <span class="caret"></span>-->
+<!--  </button>-->
+<!--  <div *ngIf='dropdownButtonState'-->
+<!--       class=" dropdown-content">-->
+<!--    <div *ngFor="let color of this.colorArray"-->
+<!--         aria-labelledby="dropdownMenuButton"-->
+<!--         class="dropdown-menu">-->
+<!--      <a (click)="chooseColor(color)"-->
+<!--           [style.background]="color"-->
+<!--           class="dropdown-item">{{this.colorArray[color]}}-->
+<!--      </a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
