@@ -1,15 +1,27 @@
 import {Component, Directive, forwardRef, HostListener, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ColorSelectorService} from './color-selector.service';
 
 
 
-@Directive({selector: '[appOnlyMyBacon]'})
+@Directive({selector: '[appKeyboardListener]'})
 export class KeyboardListenerDirective {
-
-  @HostListener('window:keyup', ['$event'])
-  keyEventArrowUp(event: KeyboardEvent) {
-    console.log(event.code);
+  constructor(private service: ColorSelectorService) { }
+  @HostListener('window:keyup.enter', ['$event'])
+  keyEventEnter(event: KeyboardEvent) {
+    // console.log('window:keyup.enter', event);
+    // this.service.selectedColor = (document.activeElement.innerHTML.substring(109, 117));
+    // let re = /^#[0-9a-f]{3,6}$/i;
+    // this.service.selectedColor = (document.activeElement.innerHTML.replace(/^(#[0-9a-f]{3,6}$)/i, '[1]'));
+    // console.log(document.activeElement.id);
+    // this.service.selectedColor = ext.toString();
+    // console.log(this.service.selectedColor);
+    console.log(this.service.arrowKeyLocation);
   }
+  // @HostListener('window:keyup', ['$event'])
+  // keyEventArrowUp(event: KeyboardEvent) {
+  //   console.log(event.code);
+  // }
   // @HostListener('window:keyup.arrowleft', ['$event'])
   // keyEventArrowLeft(event: KeyboardEvent) {
   //   console.log('window:keyup.arrowleft');
@@ -21,10 +33,6 @@ export class KeyboardListenerDirective {
   // @HostListener('window:keyup.arrowright', ['$event'])
   // keyEventArrowRight(event: KeyboardEvent) {
   //   console.log('window:keyup.arrowright');
-  // }
-  // @HostListener('window:keyup.enter', ['$event'])
-  // keyEventEnter(event: KeyboardEvent) {
-  //   console.log('window:keyup.enter');
   // }
   // @HostListener('window:keyup.escape', ['$event'])
   // keyEventEscape(event: KeyboardEvent) {
@@ -52,22 +60,20 @@ export class ColorSelectorComponent implements ControlValueAccessor {
 
   // tslint:disable-next-line:no-input-rename
   @Input('value') colorArray: string[] = [];
-  selectedColor = 'lightgray';
-  arrowkeyLocation = 0;
-  public dropdownButtonState = false;
 
-  constructor() { }
+  constructor(private service: ColorSelectorService) { }
+
   clickOnButton() {
-    this.dropdownButtonState = !this.dropdownButtonState;
+    this.service.dropdownButtonState = !this.service.dropdownButtonState;
   }
 
   clickOutsideButton() {
-    this.dropdownButtonState = false;
+    this.service.dropdownButtonState = false;
   }
 
   chooseColor(pikedColor) {
     this.writeValue(pikedColor);
-    this.selectedColor = pikedColor;
+    this.service.selectedColor = pikedColor;
     console.log(pikedColor);
   }
 
@@ -75,7 +81,7 @@ export class ColorSelectorComponent implements ControlValueAccessor {
   onTouched: any = () => {  };
 
   get value() {
-    return this.selectedColor;
+    return this.service.selectedColor;
   }
 
   set value(val) {
@@ -96,14 +102,12 @@ export class ColorSelectorComponent implements ControlValueAccessor {
       this.value = value;
     }
   }
-  keyDown(event: KeyboardEvent) {
-    switch (event.keyCode) {
-      case 38: // this is the ascii of arrow up
-        this.arrowkeyLocation--;
-        break;
-      case 40: // this is the ascii of arrow down
-        this.arrowkeyLocation++;
-        break;
-    }
+
+  chooseColorEnter(color: string) {
+    console.log('window:keyup.enter ', color);
+  }
+
+  keyPressed(event) {
+    console.log(event);
   }
 }

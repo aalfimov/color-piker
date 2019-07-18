@@ -1,9 +1,9 @@
 <div class="dropdown">
   <label>
-    <input [style.background]="selectedColor"
+    <input [style.background]="service.selectedColor"
            class="form-control"
            type="text"
-           value="{{this.selectedColor}}">
+           value="{{this.service.selectedColor}}">
   </label>
   <button (click)="clickOnButton()"
           (clickOutside)="clickOutsideButton()"
@@ -12,20 +12,20 @@
           type="button">Colors Palette
     <span class="caret"></span>
   </button>
-  <div appOnlyMyBacon
-       *ngIf='dropdownButtonState'
+  <div appKeyboardListener
+       *ngIf='service.dropdownButtonState'
        class=" dropdown-content"
        id="myDropdown">
     <div *ngFor="let color of this.colorArray; let i = index"
-         [class.active]="i == arrowkeyLocation"
-
+         [class.active]="i == service.arrowKeyLocation"
          tabindex="-0">
       <div
         (click)="chooseColor(color)"
-           (keydown.enter)="chooseColor(color)"
-           [style.background]="color"
-           class="dropdown-item active"
-           tabindex="-1">{{this.colorArray[color]}}
+        [style.background]="color"
+        class="dropdown-item active"
+        tabindex="-1"
+        id="i">
+        {{this.colorArray[i]}}
       </div>
     </div>
   </div>
