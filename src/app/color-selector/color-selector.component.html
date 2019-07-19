@@ -20,6 +20,8 @@
          [class.active]="i == service.arrowKeyLocation"
          tabindex="0">
       <div
+        appColorListener
+        [color]="color"
         (click)="chooseColor(color)"
         (keyup.enter)="chooseColor(color)"
         [style.background]="color"
@@ -31,7 +33,8 @@
   </div>
 </div>
 
-<!--            (onKeydown)="return event.keyCode != 13 || chooseColor(color)"-->
+<!--
+            (onKeydown)="return event.keyCode != 13 || chooseColor(color)"-->
 <!--<div class="dropdown">-->
 <!--  <label>-->
 <!--    <input [style.background]="selectedColor"-->

@@ -1,7 +1,6 @@
 import {Component, Directive, ElementRef, forwardRef, HostListener, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ColorSelectorService} from './color-selector.service';
-import {$} from 'protractor';
 
 
 @Component({
@@ -19,7 +18,7 @@ import {$} from 'protractor';
 
 export class ColorSelectorComponent implements ControlValueAccessor {
 
-  // tslint:disable-next-line:no-input-rename
+
   @Input('value') colorArray: string[] = [];
 
   constructor(private service: ColorSelectorService) {
@@ -73,15 +72,14 @@ export class KeyboardListenerDirective {
   // onMouseEnter(event: any) {
   //   (this.el.nativeElement as HTMLElement).focus();
   // }
-  public text: string;
 
   @HostListener('window:keyup', ['$event'])
   keyEventEnter(event: KeyboardEvent) {
     switch (event.code) {
-      case 'Enter':
-        const takeColor = document.activeElement.innerHTML
-          .toString().replace(new RegExp('<div[^>]*> '), '').replace(' <\/div>', '');
-        return takeColor.length < 8 ? this.colorSelector.chooseColor(takeColor) : null;
+      // case 'Enter':
+      //   const takeColor = document.activeElement.innerHTML
+      //     .toString().replace(new RegExp('<div[^>]*> '), '').replace(' <\/div>', '');
+      //   return takeColor.length < 8 ? this.colorSelector.chooseColor(takeColor) : null;
       case 'Escape':
         this.colorSelector.clickOutsideButton();
         break;
@@ -99,14 +97,39 @@ export class KeyboardListenerDirective {
     }
     // console.log('нажата кнопка: ', event.code);
   }
-  @HostListener('document:click', ['$event'])
-  clickOut(event) {
-    if (this.el.nativeElement.contains(event.target)) {
-      console.log('clicked inside');
-      this.text = 'clicked inside';
-    } else {
-      console.log('clicked outside');
-      this.text = 'clicked outside';
+  // @HostListener('document:click', ['$event'])
+  // clickOut(event) {
+  //   if (this.el.nativeElement.contains(event.target)) {
+  //     console.log('clicked inside');
+  //     this.text = 'clicked inside';
+  //     this.colorSelector.clickOnButton();
+  //   } else {
+  //     console.log('clicked outside');
+  //     this.colorSelector.clickOutsideButton();
+  //     this.text = 'clicked outside';
+  //   }
+  // }
+  // @HostListener('click')
+  // clickInside() {
+  //   this.colorSelector.clickOnButton();
+  // }
+  //
+  // @HostListener('document:click')
+  // clickout() {
+  //   this.colorSelector.clickOutsideButton();
+  // }
+}
+
+@Directive({selector: '[appColorListener]'})
+export class ColorListenerDirective {
+  @Input() color = '';
+  constructor(private colorSelector: ColorSelectorComponent, private el: ElementRef) {
+  }
+  @HostListener('window:keyup.enter', ['$event'])
+  keyEventEnter(event: KeyboardEvent) {
+    if (document.activeElement) {
+      console.log(document.activeElement);
     }
+    this.colorSelector.chooseColor(this.color);
   }
 }
