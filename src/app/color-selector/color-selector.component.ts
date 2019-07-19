@@ -1,47 +1,8 @@
-import {Component, Directive, forwardRef, HostListener, Input} from '@angular/core';
+import {Component, Directive, ElementRef, forwardRef, HostListener, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ColorSelectorService} from './color-selector.service';
+import {$} from 'protractor';
 
-
-
-@Directive({selector: '[appKeyboardListener]'})
-export class KeyboardListenerDirective {
-  constructor(private service: ColorSelectorService) { }
-  @HostListener('window:keyup.enter', ['$event'])
-  keyEventEnter(event: KeyboardEvent) {
-    // console.log('window:keyup.enter', event);
-    // this.service.selectedColor = (document.activeElement.innerHTML.substring(109, 117));
-    // let re = /^#[0-9a-f]{3,6}$/i;
-    // this.service.selectedColor = (document.activeElement.innerHTML.replace(/^(#[0-9a-f]{3,6}$)/i, '[1]'));
-    // console.log(document.activeElement.id);
-    // this.service.selectedColor = ext.toString();
-    // console.log(this.service.selectedColor);
-    console.log(this.service.arrowKeyLocation);
-  }
-  // @HostListener('window:keyup', ['$event'])
-  // keyEventArrowUp(event: KeyboardEvent) {
-  //   console.log(event.code);
-  // }
-  // @HostListener('window:keyup.arrowleft', ['$event'])
-  // keyEventArrowLeft(event: KeyboardEvent) {
-  //   console.log('window:keyup.arrowleft');
-  // }
-  // @HostListener('window:keyup.arrowdown', ['$event'])
-  // keyEventArrowDown(event: KeyboardEvent) {
-  //   console.log('window:keyup.arrowdown');
-  // }
-  // @HostListener('window:keyup.arrowright', ['$event'])
-  // keyEventArrowRight(event: KeyboardEvent) {
-  //   console.log('window:keyup.arrowright');
-  // }
-  // @HostListener('window:keyup.escape', ['$event'])
-  // keyEventEscape(event: KeyboardEvent) {
-  // }
-  // @HostListener('mouseenter', ['$event'])
-  // onMouseEnter(event: any) {
-  //   console.log(event);
-  // }
-}
 
 @Component({
   selector: 'app-color-selector',
@@ -53,7 +14,7 @@ export class KeyboardListenerDirective {
       useExisting: forwardRef(() => ColorSelectorComponent),
       multi: true
     },
-  ]
+  ],
 })
 
 export class ColorSelectorComponent implements ControlValueAccessor {
@@ -61,7 +22,8 @@ export class ColorSelectorComponent implements ControlValueAccessor {
   // tslint:disable-next-line:no-input-rename
   @Input('value') colorArray: string[] = [];
 
-  constructor(private service: ColorSelectorService) { }
+  constructor(private service: ColorSelectorService) {
+  }
 
   clickOnButton() {
     this.service.dropdownButtonState = !this.service.dropdownButtonState;
@@ -74,11 +36,10 @@ export class ColorSelectorComponent implements ControlValueAccessor {
   chooseColor(pikedColor) {
     this.writeValue(pikedColor);
     this.service.selectedColor = pikedColor;
-    console.log(pikedColor);
   }
 
-  onChange: any = () => {  };
-  onTouched: any = () => {  };
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
   get value() {
     return this.service.selectedColor;
@@ -102,12 +63,50 @@ export class ColorSelectorComponent implements ControlValueAccessor {
       this.value = value;
     }
   }
+}
 
-  chooseColorEnter(color: string) {
-    console.log('window:keyup.enter ', color);
+@Directive({selector: '[appKeyboardListener]'})
+export class KeyboardListenerDirective {
+  constructor(private colorSelector: ColorSelectorComponent, private el: ElementRef) {
   }
+  // @HostListener('mouseenter', ['$event'])
+  // onMouseEnter(event: any) {
+  //   (this.el.nativeElement as HTMLElement).focus();
+  // }
+  public text: string;
 
-  keyPressed(event) {
-    console.log(event);
+  @HostListener('window:keyup', ['$event'])
+  keyEventEnter(event: KeyboardEvent) {
+    switch (event.code) {
+      case 'Enter':
+        const takeColor = document.activeElement.innerHTML
+          .toString().replace(new RegExp('<div[^>]*> '), '').replace(' <\/div>', '');
+        return takeColor.length < 8 ? this.colorSelector.chooseColor(takeColor) : null;
+      case 'Escape':
+        this.colorSelector.clickOutsideButton();
+        break;
+      case 'ArrowLeft':
+        if (document.activeElement.previousSibling.firstChild) {
+          (document.activeElement.previousElementSibling as HTMLElement).focus();
+        }
+
+        break;
+      case 'ArrowRight':
+        if (document.activeElement.nextSibling) {
+          (document.activeElement.nextElementSibling as HTMLElement).focus();
+        }
+        break;
+    }
+    // console.log('нажата кнопка: ', event.code);
+  }
+  @HostListener('document:click', ['$event'])
+  clickOut(event) {
+    if (this.el.nativeElement.contains(event.target)) {
+      console.log('clicked inside');
+      this.text = 'clicked inside';
+    } else {
+      console.log('clicked outside');
+      this.text = 'clicked outside';
+    }
   }
 }
