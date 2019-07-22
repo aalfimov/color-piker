@@ -9,21 +9,18 @@
           (clickOutside)="clickOutsideButton()"
           class="btn btn-outline-dark dropdown-toggle"
           data-toggle="dropdown"
-          type="button">Colors Palette
+          type="button">
+    Colors Palette
     <span class="caret"></span>
   </button>
   <div appKeyboardListener
        *ngIf='service.dropdownButtonState'
-       class=" dropdown-content"
+       class="dropdown-content"
        id="myDropdown">
     <div *ngFor="let color of this.colorArray; let i = index"
-         [class.active]="i == service.arrowKeyLocation"
          tabindex="0">
       <div
-        appColorListener
-        [color]="color"
         (click)="chooseColor(color)"
-        (keyup.enter)="chooseColor(color)"
         [style.background]="color"
         class="dropdown-item active"
         tabindex="-1">

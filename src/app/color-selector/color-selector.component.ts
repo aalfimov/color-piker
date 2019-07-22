@@ -1,4 +1,4 @@
-import {Component, Directive, ElementRef, forwardRef, HostListener, Input} from '@angular/core';
+import {Component, Directive, ElementRef, forwardRef, HostBinding, HostListener, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ColorSelectorService} from './color-selector.service';
 
@@ -17,13 +17,10 @@ import {ColorSelectorService} from './color-selector.service';
 })
 
 export class ColorSelectorComponent implements ControlValueAccessor {
-
-
   @Input('value') colorArray: string[] = [];
 
   constructor(private service: ColorSelectorService) {
   }
-
   clickOnButton() {
     this.service.dropdownButtonState = !this.service.dropdownButtonState;
   }
@@ -66,20 +63,22 @@ export class ColorSelectorComponent implements ControlValueAccessor {
 
 @Directive({selector: '[appKeyboardListener]'})
 export class KeyboardListenerDirective {
+
   constructor(private colorSelector: ColorSelectorComponent, private el: ElementRef) {
   }
+
   // @HostListener('mouseenter', ['$event'])
   // onMouseEnter(event: any) {
   //   (this.el.nativeElement as HTMLElement).focus();
   // }
 
   @HostListener('window:keyup', ['$event'])
-  keyEventEnter(event: KeyboardEvent) {
+  keyEventArrow(event: KeyboardEvent) {
     switch (event.code) {
-      // case 'Enter':
-      //   const takeColor = document.activeElement.innerHTML
-      //     .toString().replace(new RegExp('<div[^>]*> '), '').replace(' <\/div>', '');
-      //   return takeColor.length < 8 ? this.colorSelector.chooseColor(takeColor) : null;
+      case 'Enter':
+        const takeColor = document.activeElement.innerHTML
+          .toString().replace(/( ?\<(\/?[^>]+)> ?)/g, '');
+        return takeColor.length < 8 ? this.colorSelector.chooseColor(takeColor) : null;
       case 'Escape':
         this.colorSelector.clickOutsideButton();
         break;
@@ -87,7 +86,6 @@ export class KeyboardListenerDirective {
         if (document.activeElement.previousSibling.firstChild) {
           (document.activeElement.previousElementSibling as HTMLElement).focus();
         }
-
         break;
       case 'ArrowRight':
         if (document.activeElement.nextSibling) {
@@ -95,8 +93,10 @@ export class KeyboardListenerDirective {
         }
         break;
     }
-    // console.log('нажата кнопка: ', event.code);
   }
+
+
+
   // @HostListener('document:click', ['$event'])
   // clickOut(event) {
   //   if (this.el.nativeElement.contains(event.target)) {
@@ -109,6 +109,7 @@ export class KeyboardListenerDirective {
   //     this.text = 'clicked outside';
   //   }
   // }
+
   // @HostListener('click')
   // clickInside() {
   //   this.colorSelector.clickOnButton();
@@ -117,19 +118,36 @@ export class KeyboardListenerDirective {
   // @HostListener('document:click')
   // clickout() {
   //   this.colorSelector.clickOutsideButton();
+  //   // }
   // }
 }
-
-@Directive({selector: '[appColorListener]'})
-export class ColorListenerDirective {
-  @Input() color = '';
-  constructor(private colorSelector: ColorSelectorComponent, private el: ElementRef) {
-  }
-  @HostListener('window:keyup.enter', ['$event'])
-  keyEventEnter(event: KeyboardEvent) {
-    if (document.activeElement) {
-      console.log(document.activeElement);
-    }
-    this.colorSelector.chooseColor(this.color);
-  }
-}
+// @Directive({selector: '[appColorListener]'})
+// export class ColorListenerDirective {
+//   @HostBinding('class.open') isOpen = false;
+//
+//   @HostListener('click') toggleOpen() {
+//     this.isOpen = !this.isOpen;
+//     console.log(this.isOpen);
+//   }
+//
+//   @HostListener('document:click')
+//   clickOut() {
+//     if (!this.isOpen) {
+//       this.isOpen = false;
+//       console.log(this.isOpen);
+//     }
+//   }
+// }
+  // @Input() color = '';
+  //
+  // constructor(private colorSelector: ColorSelectorComponent, private el: ElementRef) {
+  // }
+  //
+  // @HostListener('window:keyup.enter', ['$event'])
+  // keyEventEnter() {
+  //   if (document.activeElement) {
+  //     // console.log(document.activeElement.textContent);
+  //     // console.log(this.color);
+  //     this.colorSelector.chooseColor(this.color);
+  //   }
+  // }
