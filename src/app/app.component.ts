@@ -6,8 +6,8 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  palette: any;
-  // palette = ['black', '#f23565', '#3cb4f0', '#35f267', '#855313', '#871b48', '#1f5494', '#21943f'];
+  // palette: any;
+  palette = ['black', '#f23565', '#3cb4f0', '#35f267', '#855313', '#871b48', '#1f5494', '#21943f'];
   // palette = ['yellow', 'blue', 'green', 'orange', 'brown'];
   // palette =
   //   ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',

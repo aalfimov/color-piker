@@ -1,9 +1,9 @@
 <div class="dropdown">
   <label>
-    <input [style.background]="service.selectedColor"
+    <input [style.background]="selectedColor"
            class="form-control"
            type="text"
-           value="{{this.service.selectedColor}}">
+           value="{{this.selectedColor}}">
   </label>
   <button (click)="clickOnButton()"
           (clickOutside)="clickOutsideButton()"
@@ -14,7 +14,7 @@
     <span class="caret"></span>
   </button>
   <div appKeyboardListener
-       *ngIf='service.dropdownButtonState'
+       *ngIf='dropdownButtonState'
        class="dropdown-content"
        id="myDropdown">
     <div *ngFor="let color of this.colorArray; let i = index"
@@ -22,7 +22,8 @@
       <div
         (click)="chooseColor(color)"
         [style.background]="color"
-        class="dropdown-item active"
+        id="{{i}}"
+        class="dropdown-item"
         tabindex="-1">
         {{this.colorArray[i]}}
       </div>

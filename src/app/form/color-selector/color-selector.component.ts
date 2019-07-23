@@ -1,6 +1,5 @@
-import {Component, Directive, ElementRef, forwardRef, HostBinding, HostListener, Input} from '@angular/core';
+import {Component, Directive, ElementRef, forwardRef, HostListener, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {ColorSelectorService} from './color-selector.service';
 
 
 @Component({
@@ -17,28 +16,31 @@ import {ColorSelectorService} from './color-selector.service';
 })
 
 export class ColorSelectorComponent implements ControlValueAccessor {
+  // tslint:disable-next-line:no-input-rename
   @Input('value') colorArray: string[] = [];
+  public dropdownButtonState = false;
+  selectedColor = 'lightgray';
 
-  constructor(private service: ColorSelectorService) {
+  constructor() {
   }
   clickOnButton() {
-    this.service.dropdownButtonState = !this.service.dropdownButtonState;
+    this.dropdownButtonState = !this.dropdownButtonState;
   }
 
   clickOutsideButton() {
-    this.service.dropdownButtonState = false;
+    this.dropdownButtonState = false;
   }
 
   chooseColor(pikedColor) {
     this.writeValue(pikedColor);
-    this.service.selectedColor = pikedColor;
+    this.selectedColor = pikedColor;
   }
 
   onChange: any = () => { };
   onTouched: any = () => { };
 
   get value() {
-    return this.service.selectedColor;
+    return this.selectedColor;
   }
 
   set value(val) {
@@ -76,9 +78,9 @@ export class KeyboardListenerDirective {
   keyEventArrow(event: KeyboardEvent) {
     switch (event.code) {
       case 'Enter':
-        const takeColor = document.activeElement.innerHTML
-          .toString().replace(/( ?\<(\/?[^>]+)> ?)/g, '');
-        return takeColor.length < 8 ? this.colorSelector.chooseColor(takeColor) : null;
+        console.log(this.el.nativeElement.html);
+        const rez = document.activeElement.getElementsByClassName('dropdown-item').item(0);
+        return rez !== null ? this.colorSelector.chooseColor(rez.innerHTML) : null;
       case 'Escape':
         this.colorSelector.clickOutsideButton();
         break;
@@ -94,8 +96,6 @@ export class KeyboardListenerDirective {
         break;
     }
   }
-
-
 
   // @HostListener('document:click', ['$event'])
   // clickOut(event) {
