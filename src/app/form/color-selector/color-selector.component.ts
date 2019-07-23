@@ -1,6 +1,5 @@
-import {Component, Directive, ElementRef, forwardRef, HostListener, Input} from '@angular/core';
+import {Component, Directive, ElementRef, forwardRef, HostBinding, HostListener, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-
 
 @Component({
   selector: 'app-color-selector',
@@ -16,7 +15,6 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 })
 
 export class ColorSelectorComponent implements ControlValueAccessor {
-  // tslint:disable-next-line:no-input-rename
   @Input('value') colorArray: string[] = [];
   public dropdownButtonState = false;
   selectedColor = 'lightgray';
@@ -77,10 +75,9 @@ export class KeyboardListenerDirective {
   @HostListener('window:keyup', ['$event'])
   keyEventArrow(event: KeyboardEvent) {
     switch (event.code) {
-      case 'Enter':
-        console.log(this.el.nativeElement.html);
-        const rez = document.activeElement.getElementsByClassName('dropdown-item').item(0);
-        return rez !== null ? this.colorSelector.chooseColor(rez.innerHTML) : null;
+      // case 'Enter':
+      //   const rez = document.activeElement.getElementsByClassName('dropdown-item').item(0);
+      //   return rez !== null ? this.colorSelector.chooseColor(rez.innerHTML) : null;
       case 'Escape':
         this.colorSelector.clickOutsideButton();
         break;
@@ -121,33 +118,27 @@ export class KeyboardListenerDirective {
   //   // }
   // }
 }
-// @Directive({selector: '[appColorListener]'})
-// export class ColorListenerDirective {
-//   @HostBinding('class.open') isOpen = false;
-//
-//   @HostListener('click') toggleOpen() {
-//     this.isOpen = !this.isOpen;
-//     console.log(this.isOpen);
-//   }
-//
-//   @HostListener('document:click')
-//   clickOut() {
-//     if (!this.isOpen) {
-//       this.isOpen = false;
-//       console.log(this.isOpen);
-//     }
-//   }
-// }
-  // @Input() color = '';
-  //
-  // constructor(private colorSelector: ColorSelectorComponent, private el: ElementRef) {
-  // }
-  //
-  // @HostListener('window:keyup.enter', ['$event'])
-  // keyEventEnter() {
-  //   if (document.activeElement) {
-  //     // console.log(document.activeElement.textContent);
-  //     // console.log(this.color);
-  //     this.colorSelector.chooseColor(this.color);
-  //   }
-  // }
+@Directive({selector: '[appColorListener]'})
+export class ColorListenerDirective {
+  constructor(private colorSelector: ColorSelectorComponent, private el: ElementRef) {
+  }
+  @HostBinding('class.open') isOpen = false;
+
+  @HostListener('click') toggleOpen() {
+    this.isOpen = !this.isOpen;
+  }
+
+  @HostListener('document:click')
+  clickOut() {
+    if (!this.isOpen) {
+      this.isOpen = false;
+    }
+  }
+  @Input() color = '';
+
+  @HostListener('window:keyup.enter', ['$event'])
+  keyEventEnter() {
+    // console.log((this.el.nativeElement as HTMLElement).onfocus);
+  }
+}
+

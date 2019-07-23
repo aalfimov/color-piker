@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {ClickOutsideModule} from 'ng-click-outside';
 
 import {AppComponent} from './app.component';
-import {ColorSelectorComponent, KeyboardListenerDirective} from './form/color-selector/color-selector.component';
+import {ColorListenerDirective, ColorSelectorComponent, KeyboardListenerDirective} from './form/color-selector/color-selector.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormComponent } from './form/form.component';
 import {MatTabsModule} from '@angular/material';
@@ -14,6 +14,7 @@ import {MatTabsModule} from '@angular/material';
     ColorSelectorComponent,
     FormComponent,
     KeyboardListenerDirective,
+    ColorListenerDirective
   ],
   imports: [
     BrowserModule,

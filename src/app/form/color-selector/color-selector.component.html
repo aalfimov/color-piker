@@ -19,7 +19,7 @@
        id="myDropdown">
     <div *ngFor="let color of this.colorArray; let i = index"
          tabindex="0">
-      <div
+      <div appColorListener
         (click)="chooseColor(color)"
         [style.background]="color"
         id="{{i}}"
